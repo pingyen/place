@@ -144,7 +144,7 @@
 </nav>
 <main>
 	<div id="map-canvas"></div>
-	<form action="modify2.php" method="post" enctype="multipart/form-data">
+	<form action="modify2" method="post" enctype="multipart/form-data">
 		<section>
 			<h2>地址</h2>
 			<input name="address" type="text" required value="<?php echo htmlspecialchars($item['address']) ?>">

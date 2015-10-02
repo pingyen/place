@@ -181,8 +181,8 @@
 	}
 ?>
 		<div>
-			<a href="modify.php?id=<?php echo $id ?>">修改</a>
-			<a href="delete.php?id=<?php echo $id ?>" onclick="return confirm('確定刪除？')">刪除</a>
+			<a href="modify?id=<?php echo $id ?>">修改</a>
+			<a href="delete?id=<?php echo $id ?>" onclick="return confirm('確定刪除？')">刪除</a>
 		</div>
 	</article>
 <?php

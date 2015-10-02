@@ -143,7 +143,7 @@
 					tokens.push('<pre>' + escapeHTML(remark) + '</pre>');
 				}
 
-				tokens.push('<aside><a href="modify.php?id=' + id + '">修改</a> <a href="delete.php?id=' + id + '" onclick="return confirm(\'確定刪除？\')">刪除</a></aside>');
+				tokens.push('<aside><a href="modify?id=' + id + '">修改</a> <a href="delete?id=' + id + '" onclick="return confirm(\'確定刪除？\')">刪除</a></aside>');
 					
   				var infowindow = new maps.InfoWindow({
 						content: tokens.join('')
