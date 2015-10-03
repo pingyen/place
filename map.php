@@ -161,10 +161,10 @@
 					latLng = new maps.LatLng(latitude, longitude),
 					photo = item.photo,
 					remark = item.remark,
-					tokens = ['<h2><a href="map?id=' + id + '" target="_blank" >' + escapeHTML(address) + '</a></h2>'];
+					tokens = ['<h2><a href="map?id=' + id + '" >' + escapeHTML(address) + '</a></h2>'];
 
 				if (photo !== undefined) {
-					tokens.push('<p><a href="photos/' + photo + '"><img src="photos/' + photo + '"></a></p>');
+					tokens.push('<p><a href="photos/' + photo + '" target="_blank"><img src="photos/' + photo + '"></a></p>');
 				}				
 
 				if (remark !== undefined) {
