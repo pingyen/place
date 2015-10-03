@@ -17,14 +17,14 @@
 
 	h1 {
 		font-family: cwTeXKai;
-		font-size: 120px;
-		margin: 12px 6px;
+		font-size: 42px;
+		margin: 6px 12px;
 	}
 
 	body > nav {
-		left: 126px;
+		left: 64px;
 		position: absolute;
-		top: 72px;
+		top: 12px;
 	}
 
 	body > nav > ul {
@@ -60,9 +60,11 @@
 	}
 
 	body > form > button {
+		background-color: #FFF;
 		border-radius: 10px;
+		font-size: 17px;
 		padding: 3px 7px;
-		vertical-align: -1px
+		vertical-align: 2px;
 	}
 
 	body > main > article {
@@ -106,6 +108,7 @@
 
 	body > main > article > div {
 		font-size: 15px;
+		margin-top: 7px;
 		padding-left: 6px;
 	}
 
@@ -163,7 +166,7 @@
 <?php
 	$data = json_decode(file_get_contents('data.json'), true);
 
-	uksort($data, function($a, $b) {
+	uasort($data, function($a, $b) {
 			return $b['latitude'] - $a['latitude'];
 		});
 

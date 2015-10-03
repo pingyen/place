@@ -17,14 +17,14 @@
 
 	h1 {
 		font-family: cwTeXKai;
-		font-size: 120px;
-		margin: 12px 6px;
+		font-size: 42px;
+		margin: 6px 12px;
 	}
 
 	body > nav {
-		left: 126px;
+		left: 64px;
 		position: absolute;
-		top: 72px;
+		top: 12px;
 	}
 
 	body > nav > ul {
@@ -94,9 +94,28 @@
 		color: #AAA;
 	}
 
-	#map-canvas {
-		height: 200px;
+	#map {
 		margin-bottom: 18px;
+	}
+
+	#map-canvas {
+		height: 320px;
+		margin-bottom: 8px;
+	}
+
+	#map-canvas.preparing {
+		opacity: 0.3;
+	}
+
+	#map-locate {
+		border: 1px solid #AAA;
+		border-radius: 3px;
+		color: #333;
+		display: block;
+		font-size: 15px;
+		text-align: center;
+		text-decoration: none;
+		padding: 8px 0;
 	}
 
 	.ios body > main > form {
@@ -123,7 +142,10 @@
 </nav>
 <main>
 	<form action="add2" method="post" enctype="multipart/form-data">
-		<div id="map-canvas"></div>
+		<div id="map">
+			<div id="map-canvas" class="preparing"></div>
+			<a id="map-locate" href="#">定位目前位置</a>
+		</div>
 		<section>
 			<h2>地址</h2>
 			<input name="address" type="text" required>
@@ -150,8 +172,13 @@
 	(function() {
 		var maps = google.maps,
 			event = maps.event,
-			map = new maps.Map(document.getElementById('map-canvas'));
-			
+			mapCanvas = document.getElementById('map-canvas');
+		
+		var map = new maps.Map(mapCanvas, {
+			mapTypeControl: false,
+			streetViewControl: false
+		});
+
 		var marker = new maps.Marker({
 			map: map,
 			draggable: true
@@ -171,7 +198,15 @@
 			longitude.value = latLng.lng();
 		});
 
-		var initPosition = function(lat, lng, zoom) {
+		event.addListener(map, 'click', function(e) {
+			var latLng = e.latLng;
+
+			marker.setPosition(latLng);
+			latitude.value = latLng.lat();
+			longitude.value = latLng.lng();
+		});
+
+		var setPosition = function(lat, lng, zoom) {
 			var latLng = new maps.LatLng(lat, lng);
 
 			map.setCenter(latLng);
@@ -180,20 +215,33 @@
 
 			latitude.value = lat;
 			longitude.value = lng;
+			mapCanvas.classList.remove('preparing');
 			button.removeAttribute('disabled');
 		}
 
 		if (geolocation) {
-			geolocation.getCurrentPosition(function (position) {
-				var coords = position.coords;
-					
-				initPosition(coords.latitude, coords.longitude, 17);
-			}, function() {
-				initPosition(25.037525, 121.563782, 11);
-			});
+			var getPosition = function() {
+				geolocation.getCurrentPosition(function (position) {
+					var coords = position.coords;
+
+					setPosition(coords.latitude, coords.longitude, 17);
+				}, function() {
+					setPosition(25.037525, 121.563782, 11);
+				});
+			}
+
+			getPosition();
+
+			document.getElementById('map-locate').onclick = function() {
+				button.setAttribute('disabled', 'disabled');
+				mapCanvas.classList.add('preparing');
+				getPosition();
+
+				return false;
+			}
 		}
 		else {
-			initPosition(25.037525, 121.563782, 11);
+			setPosition(25.037525, 121.563782, 11);
 		}
 	})();
 </script>
