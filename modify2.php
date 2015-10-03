@@ -11,7 +11,7 @@
 
 	$id = $_POST['id'];
 	$json = file_get_contents('data.json');
-	$data = json_decode(file_get_contents('data.json'), true);
+	$data = json_decode($json, true);
 
 	if (isset($data[$id]) === false) {
 		header('Location: map');

@@ -5,7 +5,6 @@
 	}
 
 	$id = $_GET['id'];
-	$json = file_get_contents('data.json');
 	$data = json_decode(file_get_contents('data.json'), true);
 
 	if (isset($data[$id]) === false) {
