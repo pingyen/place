@@ -175,7 +175,7 @@
 		$longitude = $item['longitude'];
 ?>
 	<article class="hidden" data-latitude="<?php echo $latitude ?>" data-longitude="<?php echo $longitude ?>" >
-		<h2><a href="https://maps.google.com.tw/maps?q=<?php echo "$latitude,$longitude" ?>" target="_blank" ><?php echo htmlspecialchars($item['address']) ?></a></h2>
+		<h2><a href="map?id=<?php echo $id ?>" ><?php echo htmlspecialchars($item['address']) ?></a></h2>
 <?php
 	if (isset($item['photo']) === true) {
 ?>
@@ -192,6 +192,7 @@
 		<div>
 			<a href="modify?id=<?php echo $id ?>">修改</a>
 			<a href="delete?id=<?php echo $id ?>" onclick="return confirm('確定刪除？')">刪除</a>
+			<a href="https://maps.google.com.tw/maps?q=<?php echo "$latitude,$longitude" ?>" target="_blank" >開啟於 Google Maps</a>
 		</div>
 	</article>
 <?php

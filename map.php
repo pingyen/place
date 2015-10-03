@@ -1,4 +1,24 @@
 <?php
+	$json = file_get_contents('data.json');
+
+	if (isset($_GET['id']) === true) {
+		$map = array();
+
+		foreach(explode(', ', $_GET['id']) as $id) {
+			$map[$id] = true;
+		}
+
+		$data = array();
+
+		foreach(json_decode($json, true) as $id => $item) {
+			if (isset($map[$id]) === true) {
+				$data[$id] = $item;
+			}
+		}
+
+		$json = json_encode($data);
+	}
+
 	$request = $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
@@ -130,7 +150,7 @@
 			event = maps.event,
 			zIndex = 1000,
 			map = new maps.Map(document.getElementById('map-canvas')),
-			data = <?php echo file_get_contents('data.json') ?>,
+			data = <?php echo $json ?>,
 			latLngBounds = new maps.LatLngBounds();
 
 		for (var id in data) {
@@ -141,26 +161,31 @@
 					latLng = new maps.LatLng(latitude, longitude),
 					photo = item.photo,
 					remark = item.remark,
-					tokens = ['<h2><a href="https://maps.google.com.tw/maps?q=' + latitude + ',' + longitude + '" target="_blank" >' + escapeHTML(address) + '</a></h2>'];
+					tokens = ['<h2><a href="map?id=' + id + '" target="_blank" >' + escapeHTML(address) + '</a></h2>'];
 
 				if (photo !== undefined) {
-					tokens.push('<p><a href="photos/' + photo + '" target="_blank"><img src="photos/' + photo + '"></a></p>');
+					tokens.push('<p><a href="photos/' + photo + '"><img src="photos/' + photo + '"></a></p>');
 				}				
 
 				if (remark !== undefined) {
 					tokens.push('<pre>' + escapeHTML(remark) + '</pre>');
 				}
 
-				tokens.push('<aside><a href="modify?id=' + id + '">修改</a> <a href="delete?id=' + id + '" onclick="return confirm(\'確定刪除？\')">刪除</a></aside>');
-					
+				tokens.push('<aside>');
+				tokens.push('<a href="modify?id=' + id + '">修改</a>')
+				tokens.push('<a href="delete?id=' + id + '" onclick="return confirm(\'確定刪除？\')">刪除</a>');
+				tokens.push('<a href="https://maps.google.com.tw/maps?q=' + latitude + ',' + longitude + '" target="_blank" >開啟於 Google Maps</a>');
+				tokens.push('</aside>');
+
   				var infowindow = new maps.InfoWindow({
-						content: tokens.join('')
-  					}),
-					marker = new maps.Marker({
-						position: latLng,
-						map: map,
-						title: address
-					});
+					content: tokens.join(' ')
+				});
+
+				var marker = new maps.Marker({
+					position: latLng,
+					map: map,
+					title: address
+				});
 
 				event.addListener(marker, 'click', function() {
 					infowindow.setZIndex(++zIndex);
