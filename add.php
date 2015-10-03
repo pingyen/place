@@ -1,3 +1,6 @@
+<?php
+	$request = $_SERVER['REQUEST_URI'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +138,7 @@
 <h1>地</h1>
 <nav>
 	<ul>
-		<li><a href="<?php echo substr($_SERVER['REQUEST_URI'], 0, -3) ?>" >列表</a></li>
+		<li><a href="<?php echo substr($request, 0, strrpos($request, '/')) ?>" >列表</a></li>
 		<li><a href="map" >地圖</a></li>
 		<li><a href="add" class="current" >新增</a></li>
 	</ul>
