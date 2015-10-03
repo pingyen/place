@@ -59,6 +59,12 @@
 		width: 60%;
 	}
 
+	body > form > button {
+		border-radius: 10px;
+		padding: 3px 7px;
+		vertical-align: -1px
+	}
+
 	body > main > article {
 		background: #FFF;
 		box-shadow: 0 2px 1px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.3);

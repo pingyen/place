@@ -15,6 +15,10 @@
 		   	url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf) format('truetype');
 	}
 
+	html, body {
+		height: 100%;
+	}
+
 	h1 {
 		font-family: cwTeXKai;
 		font-size: 120px;
@@ -51,7 +55,8 @@
 	}
 
 	#map-canvas {
-		height: 70vh;
+		height: 60vh;
+		height: calc(100% - 150px);
 	}
 
 	#map-canvas h2 {

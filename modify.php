@@ -96,7 +96,7 @@
 
 	body > main > form > section > input[type=text] {
 		font-size: 21px;
-		width: 98%;
+		width: 99%;
 	}
 
 	body > main > form > section > img {
@@ -111,7 +111,7 @@
 
 	body > main > form > section > textarea {
 		font-size: 21px;
-		width: 98%;
+		width: 99%;
 	}
 
 	body > main > form > button {
@@ -125,7 +125,15 @@
 
 	#map-canvas {
 		height: 200px;
-		margin: 12px;
+		margin-bottom: 18px;
+	}
+
+	.ios body > main > form {
+		width: 100%;
+	}
+
+	.ios body > main > form > section > input[type=text] {
+		width: 93%;
 	}
 </style>
 <!--[if lt IE 9]>
@@ -143,8 +151,8 @@
 	</ul>
 </nav>
 <main>
-	<div id="map-canvas"></div>
 	<form action="modify2" method="post" enctype="multipart/form-data">
+		<div id="map-canvas"></div>
 		<section>
 			<h2>地址</h2>
 			<input name="address" type="text" required value="<?php echo htmlspecialchars($item['address']) ?>">
@@ -174,6 +182,11 @@
 		<input type="hidden" name="longitude" value="<?php echo $longitude ?>">
 	</form>
 </main>
+<script>
+	if(/iPad|iPhone|iPod/.test(navigator.platform) === true) {
+		document.getElementsByTagName('html')[0].classList.add('ios');
+	}
+</script>
 <script>
 	(function() {
 		var maps = google.maps,
