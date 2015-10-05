@@ -85,7 +85,7 @@
 	#map-canvas h2 {
 		font-family: cwTeXKai;
 		font-size: 24px;
-		margin: 6px 0 0;
+		margin: 6px 0;
 	}
 
 	#map-canvas h2 > a {
