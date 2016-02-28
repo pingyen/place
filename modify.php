@@ -176,8 +176,8 @@
 			<a id="map-locate" href="#">定位目前位置</a>
 		</div>
 		<section>
-			<h2>地址</h2>
-			<input name="address" type="text" required value="<?php echo htmlspecialchars($item['address']) ?>">
+			<h2>名稱</h2>
+			<input name="name" type="text" required value="<?php echo htmlspecialchars($item['name']) ?>">
 		</section>
 <?php
 	if (isset($item['photo']) === true) {

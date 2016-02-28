@@ -1,5 +1,5 @@
 <?php
-	if (isset($_POST['address']) === false ||
+	if (isset($_POST['name']) === false ||
 		isset($_FILES['photo']) === false ||
 		isset($_POST['remark']) === false ||
 		isset($_POST['latitude']) === false ||
@@ -18,7 +18,7 @@
 	$ref =& $data[$id];
 
 	$ref = array(
-		'address' => trim($_POST['address']),
+		'name' => trim($_POST['name']),
 		'latitude' => floatval($_POST['latitude']),
 		'longitude' => floatval($_POST['longitude'])
 	);

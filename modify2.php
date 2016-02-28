@@ -1,6 +1,6 @@
 <?php
 	if (isset($_POST['id']) === false ||
-		isset($_POST['address']) === false ||
+		isset($_POST['name']) === false ||
 		isset($_FILES['photo']) === false ||
 		isset($_POST['remark']) === false ||
 		isset($_POST['latitude']) === false ||
@@ -23,7 +23,7 @@
 	file_put_contents("backup/$time.modify.$id.json", $json);
 	$ref =& $data[$id];
 
-	$ref['address'] = trim($_POST['address']);
+	$ref['name'] = trim($_POST['name']);
 	$ref['latitude'] = floatval($_POST['latitude']);
 	$ref['longitude'] = floatval($_POST['longitude']);
 

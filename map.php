@@ -155,13 +155,13 @@
 
 		for (var id in data) {
 			(function(id, item) {
-				var address = item.address,
+				var name = item.name,
 					latitude = item.latitude,
 					longitude = item.longitude,
 					latLng = new maps.LatLng(latitude, longitude),
 					photo = item.photo,
 					remark = item.remark,
-					tokens = ['<h2><a href="map?id=' + id + '" >' + escapeHTML(address) + '</a></h2>'];
+					tokens = ['<h2><a href="map?id=' + id + '" >' + escapeHTML(name) + '</a></h2>'];
 
 				if (photo !== undefined) {
 					tokens.push('<p><a href="photos/' + photo + '" target="_blank"><img src="photos/' + photo + '"></a></p>');
@@ -184,7 +184,7 @@
 				var marker = new maps.Marker({
 					position: latLng,
 					map: map,
-					title: address
+					title: name
 				});
 
 				event.addListener(marker, 'click', function() {

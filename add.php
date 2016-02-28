@@ -150,8 +150,8 @@
 			<a id="map-locate" href="#">定位目前位置</a>
 		</div>
 		<section>
-			<h2>地址</h2>
-			<input name="address" type="text" required>
+			<h2>名稱</h2>
+			<input name="name" type="text" required>
 		</section>
 		<section>
 			<h2>照片 <span>可省略</span></h2>

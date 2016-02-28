@@ -168,7 +168,7 @@
 		$longitude = $item['longitude'];
 ?>
 	<article class="hidden" data-latitude="<?php echo $latitude ?>" data-longitude="<?php echo $longitude ?>" >
-		<h2><a href="map?id=<?php echo $id ?>" ><?php echo htmlspecialchars($item['address']) ?></a></h2>
+		<h2><a href="map?id=<?php echo $id ?>" ><?php echo htmlspecialchars($item['name']) ?></a></h2>
 <?php
 	if (isset($item['photo']) === true) {
 ?>
