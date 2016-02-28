@@ -76,7 +76,8 @@
 	}
 
 	body > main > article.hidden {
-		animation: wobble 2s infinite;
+		animation: bounce 2s infinite;
+		opacity: 0.3;
 	}
 
 	body > main > article.fadeIn {
@@ -131,18 +132,10 @@
 	    to   { opacity: 1; }
 	}
 
-	@keyframes wobble {
-		0%, 100% {
-			transform:
-				rotateX(8.75deg)
-				rotateY(35deg);
-		}
-		50% {
-			transform:
-				rotateX(35deg)
-				rotateY(-35deg)
-				rotate(180deg);
-		}
+	@keyframes bounce {
+		0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+		40% { transform: translateY(12px); }
+		60% { transform: translateY(6px); }
 	}
 </style>
 <!--[if lt IE 9]>
