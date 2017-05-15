@@ -1,4 +1,11 @@
 <?php
+	session_start();
+
+	if (isset($_SESSION['key']) === false) {
+		header('Location: map');
+		die();
+	}
+
 	if (isset($_POST['id']) === false ||
 		isset($_POST['name']) === false ||
 		isset($_FILES['photo']) === false ||
@@ -63,5 +70,5 @@
 
 	file_put_contents('data.json', json_encode($data, JSON_PRETTY_PRINT));
 
-	header('Location: map');
+	header('Location: map?id=' . $id);
 ?>

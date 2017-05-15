@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,7 +151,13 @@
 	<ul>
 		<li><a href="<?php echo $_SERVER['REQUEST_URI'] ?>" class="current" >列表</a></li>
 		<li><a href="map" >地圖</a></li>
+	<?php
+		if (isset($_SESSION['key']) === true) {
+	?>
 		<li><a href="add" >新增</a></li>
+	<?php
+		}
+	?>
 	</ul>
 </nav>
 <form>
@@ -183,8 +192,14 @@
 	}
 ?>
 		<div>
+	<?php
+		if (isset($_SESSION['key']) === true) {
+	?>
 			<a href="modify?id=<?php echo $id ?>">修改</a>
 			<a href="delete?id=<?php echo $id ?>" onclick="return confirm('確定刪除？')">刪除</a>
+	<?php
+		}
+	?>
 			<a href="https://maps.google.com.tw/maps?q=<?php echo "$latitude,$longitude" ?>" target="_blank" >開啟於 Google Maps</a>
 		</div>
 	</article>

@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	$json = file_get_contents('data.json');
 
 	if (isset($_GET['id']) === true) {
@@ -78,8 +80,8 @@
 	}
 
 	#map-canvas {
-		height: 64vh;
-		height: calc(100% - 64px);
+		height: 90vh;
+		height: calc(100% - 54px);
 	}
 
 	#map-canvas h2 {
@@ -128,7 +130,13 @@
 	<ul>
 		<li><a href="<?php echo substr($request, 0, strrpos($request, '/')) ?>" >列表</a></li>
 		<li><a href="map" class="current" >地圖</a></li>
+	<?php
+		if (isset($_SESSION['key']) === true) {
+	?>
 		<li><a href="add" >新增</a></li>
+	<?php
+		}
+	?>
 	</ul>
 </nav>
 <div id="map-canvas"></div>
@@ -172,8 +180,14 @@
 				}
 
 				tokens.push('<aside>');
+		<?php
+			if (isset($_SESSION['key']) === true) {
+		?>
 				tokens.push('<a href="modify?id=' + id + '">修改</a>')
 				tokens.push('<a href="delete?id=' + id + '" onclick="return confirm(\'確定刪除？\')">刪除</a>');
+		<?php
+			}
+		?>
 				tokens.push('<a href="https://maps.google.com.tw/maps?q=' + latitude + ',' + longitude + '" target="_blank" >開啟於 Google Maps</a>');
 				tokens.push('</aside>');
 
@@ -191,6 +205,15 @@
 					infowindow.setZIndex(++zIndex);
 					infowindow.open(map, marker);
   				});
+
+			<?php
+				if (isset($_GET['id']) === true) {
+			?>
+					infowindow.setZIndex(++zIndex);
+					infowindow.open(map, marker);
+			<?php
+				}
+			?>
 
 				latLngBounds.extend(latLng);
 			})(id, data[id]);

@@ -1,4 +1,11 @@
 <?php
+	session_start();
+
+	if (isset($_SESSION['key']) === false) {
+		header('Location: map');
+		die();
+	}
+
 	if (isset($_GET['id']) === false) {
 		header('Location: map');
 		die();
@@ -252,7 +259,7 @@
 
 		var geolocation = navigator.geolocation;
 
-		if (geolocation) {		
+		if (geolocation !== undefined) {
 			var setPosition = function(lat, lng, zoom) {
 				var latLng = new maps.LatLng(lat, lng);
 

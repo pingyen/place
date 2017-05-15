@@ -1,4 +1,11 @@
 <?php
+	session_start();
+
+	if (isset($_SESSION['key']) === false) {
+		header('Location: map');
+		die();
+	}
+
 	$request = $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
@@ -222,30 +229,58 @@
 			button.removeAttribute('disabled');
 		}
 
-		if (geolocation) {
-			var getPosition = function() {
+		var getPosition = geolocation === undefined ?
+			function() {
+				setPosition(25.037525, 121.563782, 11);
+			} :
+			function() {
 				geolocation.getCurrentPosition(function (position) {
 					var coords = position.coords;
 
 					setPosition(coords.latitude, coords.longitude, 17);
-				}, function() {
-					setPosition(25.037525, 121.563782, 11);
-				});
-			}
+					}, function() {
+						setPosition(25.037525, 121.563782, 11);
+					}
+				);
+			};
 
+		document.getElementById('map-locate').onclick = function() {
+			button.setAttribute('disabled', 'disabled');
+			mapCanvas.classList.add('preparing');
 			getPosition();
 
-			document.getElementById('map-locate').onclick = function() {
-				button.setAttribute('disabled', 'disabled');
-				mapCanvas.classList.add('preparing');
-				getPosition();
+			return false;
+		}
 
+		if (function() {
+			var search = location.search;
+
+			if (search === '') {
 				return false;
 			}
+
+			var tokens = search.substr(1).split(',');
+
+			if (tokens.length !== 2) {
+				return false;
+			}
+
+			var latitude = parseFloat(tokens[0]),
+				longitude = parseFloat(tokens[1]);
+
+			if (isNaN(latitude) === true ||
+				isNaN(longitude) === true) {
+				return false;
+			}
+
+			setPosition(latitude, longitude, 17);
+
+			return true;
+		}() === true) {
+			return;
 		}
-		else {
-			setPosition(25.037525, 121.563782, 11);
-		}
+
+		getPosition();
 	})();
 </script>
 <script>
