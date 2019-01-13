@@ -104,7 +104,6 @@
 		line-height: 1;
 		margin: 12px 0 6px;
 		overflow: visible;
-		padding-left: 2px;
 	}
 
 	#map-canvas aside {

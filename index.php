@@ -113,7 +113,6 @@
 	body > main > article > div {
 		font-size: 15px;
 		margin-top: 7px;
-		padding-left: 6px;
 	}
 
 	body > main > article > div > a {
